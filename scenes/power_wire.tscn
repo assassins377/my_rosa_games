@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bhp1vbmnr4i6h"]
+
+[ext_resource type="Texture2D" path="res://assets/power_wire.png" id="1_wire_texture"]
+[ext_resource type="Script" path="res://scripts/power_wire.gd" id="2_wire_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wire"]
+size = Vector2(84, 38)
+
+[node name="PowerWire" type="StaticBody2D"]
+script = ExtResource("2_wire_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_wire_texture")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_wire")

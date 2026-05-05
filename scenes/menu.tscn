@@ -1,0 +1,497 @@
+[gd_scene load_steps=10 format=3 uid="uid://c53lklh03dsag"]
+
+[ext_resource type="Script" uid="uid://bx7d164vxd60i" path="res://scripts/menu.gd" id="1_menu"]
+[ext_resource type="Texture2D" path="res://assets/l1_nord_active_frames/l1_nord_active_00.png" id="2_factory"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_main_panel"]
+bg_color = Color(0.055, 0.071, 0.078, 0)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_settings_panel"]
+bg_color = Color(0.065, 0.076, 0.083, 0.98)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.54, 0.28, 0.34)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 22
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_text_panel"]
+bg_color = Color(0.035, 0.045, 0.052, 0.86)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25, 0.86, 0.9, 0.22)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
+bg_color = Color(0.12, 0.14, 0.145, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.34, 0.42, 0.42, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+content_margin_left = 14
+content_margin_top = 8
+content_margin_right = 14
+content_margin_bottom = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
+bg_color = Color(0.16, 0.19, 0.19, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.35, 0.88, 0.93, 0.86)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+content_margin_left = 14
+content_margin_top = 8
+content_margin_right = 14
+content_margin_bottom = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
+bg_color = Color(0.20, 0.25, 0.24, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.54, 0.28, 0.88)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+content_margin_left = 14
+content_margin_top = 8
+content_margin_right = 14
+content_margin_bottom = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_focus"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.95, 0.74, 0.42, 0.95)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.035, 0.048, 0.052, 1)
+
+[node name="LeftBand" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -900.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.25, 0.09, 0.08, 0.34)
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -330.0
+offset_right = 300.0
+offset_bottom = 330.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_main_panel")
+
+[node name="Margin" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 26
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 26
+
+[node name="Scroll" type="ScrollContainer" parent="Panel/Margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Panel/Margin/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.98, 0.94, 0.86, 1)
+theme_override_font_sizes/font_size = 58
+text = "ROSA"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Panel/Margin/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.70, 0.82, 0.80, 1)
+text = "An old scientist against an alien planet."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Showcase" type="HBoxContainer" parent="Panel/Margin/Scroll/VBox"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 24
+
+[node name="FactoryPreview" type="TextureRect" parent="Panel/Margin/Scroll/VBox/Showcase"]
+custom_minimum_size = Vector2(180, 160)
+layout_mode = 2
+texture = ExtResource("2_factory")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PlayButton" type="Button" parent="Panel/Margin/Scroll/VBox"]
+custom_minimum_size = Vector2(260, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+text = "Play"
+
+[node name="HowToPlayButton" type="Button" parent="Panel/Margin/Scroll/VBox"]
+custom_minimum_size = Vector2(260, 46)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+text = "How to play"
+
+[node name="StoryButton" type="Button" parent="Panel/Margin/Scroll/VBox"]
+custom_minimum_size = Vector2(260, 46)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+text = "Story"
+
+[node name="SettingsButton" type="Button" parent="Panel/Margin/Scroll/VBox"]
+custom_minimum_size = Vector2(260, 46)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+text = "Settings"
+
+[node name="Instructions" type="PanelContainer" parent="Panel/Margin/Scroll/VBox"]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_text_panel")
+
+[node name="InstructionsMargin" type="MarginContainer" parent="Panel/Margin/Scroll/VBox/Instructions"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 12
+
+[node name="Text" type="Label" parent="Panel/Margin/Scroll/VBox/Instructions/InstructionsMargin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.88, 0.91, 0.86, 1)
+text = "Explore the alien planet, gather dimension cores, and build a base. Construct machines, connect power, and prepare defenses against local creatures."
+autowrap_mode = 3
+
+[node name="QuitButton" type="Button" parent="Panel/Margin/Scroll/VBox"]
+custom_minimum_size = Vector2(260, 46)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+text = "Quit"
+
+[node name="StoryWindow" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Shade" type="ColorRect" parent="StoryWindow"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.62)
+
+[node name="Panel" type="PanelContainer" parent="StoryWindow"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -250.0
+offset_right = 300.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_settings_panel")
+
+[node name="Margin" type="MarginContainer" parent="StoryWindow/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 24
+
+[node name="Scroll" type="ScrollContainer" parent="StoryWindow/Panel/Margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBox" type="VBoxContainer" parent="StoryWindow/Panel/Margin/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="TitleLabel" type="Label" parent="StoryWindow/Panel/Margin/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.98, 0.94, 0.88, 1)
+theme_override_font_sizes/font_size = 32
+text = "Story"
+horizontal_alignment = 1
+
+[node name="TextPanel" type="PanelContainer" parent="StoryWindow/Panel/Margin/Scroll/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_text_panel")
+
+[node name="TextMargin" type="MarginContainer" parent="StoryWindow/Panel/Margin/Scroll/VBox/TextPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 14
+
+[node name="Text" type="Label" parent="StoryWindow/Panel/Margin/Scroll/VBox/TextPanel/TextMargin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.88, 0.91, 0.86, 1)
+text = "You are 70 years old. You spent your life studying black holes and finally discovered a way into another dimension. The experiment worked, but it threw you onto an alien planet."
+autowrap_mode = 3
+
+[node name="CloseButton" type="Button" parent="StoryWindow/Panel/Margin/Scroll/VBox"]
+custom_minimum_size = Vector2(260, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+text = "Close"
+
+[node name="SettingsWindow" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Shade" type="ColorRect" parent="SettingsWindow"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.62)
+
+[node name="Panel" type="PanelContainer" parent="SettingsWindow"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -270.0
+offset_top = -270.0
+offset_right = 270.0
+offset_bottom = 270.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_settings_panel")
+
+[node name="Margin" type="MarginContainer" parent="SettingsWindow/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 24
+
+[node name="Scroll" type="ScrollContainer" parent="SettingsWindow/Panel/Margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBox" type="VBoxContainer" parent="SettingsWindow/Panel/Margin/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="TitleLabel" type="Label" parent="SettingsWindow/Panel/Margin/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.98, 0.94, 0.88, 1)
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="ResolutionLabel" type="Label" parent="SettingsWindow/Panel/Margin/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.88, 0.91, 0.86, 1)
+text = "Resolution"
+
+[node name="ResolutionOption" type="OptionButton" parent="SettingsWindow/Panel/Margin/Scroll/VBox"]
+custom_minimum_size = Vector2(260, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+
+[node name="ScreenModeLabel" type="Label" parent="SettingsWindow/Panel/Margin/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.88, 0.91, 0.86, 1)
+text = "Screen mode"
+
+[node name="ScreenModeOption" type="OptionButton" parent="SettingsWindow/Panel/Margin/Scroll/VBox"]
+custom_minimum_size = Vector2(260, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+
+[node name="LanguageLabel" type="Label" parent="SettingsWindow/Panel/Margin/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.88, 0.91, 0.86, 1)
+text = "Language"
+
+[node name="LanguageOption" type="OptionButton" parent="SettingsWindow/Panel/Margin/Scroll/VBox"]
+custom_minimum_size = Vector2(260, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+
+[node name="AdaptiveLabel" type="Label" parent="SettingsWindow/Panel/Margin/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78, 0.84, 0.82, 1)
+text = "Adaptive UI: enabled"
+autowrap_mode = 3
+
+[node name="ControlsTitleLabel" type="Label" parent="SettingsWindow/Panel/Margin/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.98, 0.94, 0.88, 1)
+theme_override_font_sizes/font_size = 22
+text = "Controls"
+
+[node name="ControlsHintLabel" type="Label" parent="SettingsWindow/Panel/Margin/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78, 0.84, 0.82, 1)
+text = "Press a button, then press a new key."
+autowrap_mode = 3
+
+[node name="ControlsList" type="VBoxContainer" parent="SettingsWindow/Panel/Margin/Scroll/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="SaveButton" type="Button" parent="SettingsWindow/Panel/Margin/Scroll/VBox"]
+custom_minimum_size = Vector2(260, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+text = "Save"
+
+[node name="SaveStatusLabel" type="Label" parent="SettingsWindow/Panel/Margin/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.85, 0.95, 1)
+horizontal_alignment = 1
+
+[node name="ResetButton" type="Button" parent="SettingsWindow/Panel/Margin/Scroll/VBox"]
+custom_minimum_size = Vector2(260, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+text = "Reset settings"
+
+[node name="CloseButton" type="Button" parent="SettingsWindow/Panel/Margin/Scroll/VBox"]
+custom_minimum_size = Vector2(260, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+text = "Close"

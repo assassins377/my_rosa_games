@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpc4mjjg12mty"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_player"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_player"]
+radius = 18.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_player")
+
+[node name="Visual" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+scale = Vector2(0.52, 0.52)
+z_index = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_player")
+
+[node name="HealthBar" type="Control" parent="."]
+z_index = 30
+offset_left = -34.0
+offset_top = -54.0
+offset_right = 34.0
+offset_bottom = -30.0
+
+[node name="Background" type="ColorRect" parent="HealthBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.04, 0.045, 0.84)
+
+[node name="Fill" type="ColorRect" parent="HealthBar"]
+layout_mode = 1
+anchors_preset = 13
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(0, 0)
+color = Color(0.25, 0.95, 0.52, 0.95)
+
+[node name="HealthLabel" type="Label" parent="HealthBar"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "3 / 3"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(0.92, 0.96, 0.92, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = true
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+zoom = Vector2(1, 1)

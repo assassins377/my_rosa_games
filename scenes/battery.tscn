@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://b78iivq3dix6x"]
+
+[ext_resource type="Texture2D" uid="uid://dljojrwepabud" path="res://assets/battery_frames/battery_05.png" id="1_battery_texture"]
+[ext_resource type="Script" uid="uid://c3repqpfm88vt" path="res://scripts/battery.gd" id="2_battery_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_battery"]
+size = Vector2(82.5, 71)
+
+[node name="Battery" type="StaticBody2D" unique_id=1384024948]
+position = Vector2(-1, 1)
+script = ExtResource("2_battery_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=496187780]
+position = Vector2(51.811337, 26.237503)
+scale = Vector2(0.17664383, 0.17664383)
+texture = ExtResource("1_battery_texture")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=83377058]
+position = Vector2(54, 25)
+shape = SubResource("RectangleShape2D_battery")
+
+[node name="StatusLabel" type="Label" parent="." unique_id=497735416]
+offset_left = -59.0
+offset_top = -45.0
+offset_right = 161.0
+offset_bottom = -3.0
+theme_override_colors/font_color = Color(1, 0.9, 0.64, 1)
+theme_override_font_sizes/font_size = 12
+text = "АКБ"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="InfoButton" type="Button" parent="." unique_id=1098830853]
+z_index = 45
+offset_left = 40.0
+offset_top = -64.0
+offset_right = 66.0
+offset_bottom = -36.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 14
+text = "i"
+
+[node name="InfoPanel" type="PanelContainer" parent="." unique_id=61569953]
+visible = false
+z_index = 44
+offset_left = 98.0
+offset_top = -178.0
+offset_right = 310.0
+offset_bottom = -60.0
+
+[node name="Margin" type="MarginContainer" parent="InfoPanel" unique_id=1778355763]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 8
+
+[node name="InfoText" type="Label" parent="InfoPanel/Margin" unique_id=1734655468]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.64, 1)
+theme_override_font_sizes/font_size = 12
+text = "АКБ"
+autowrap_mode = 3

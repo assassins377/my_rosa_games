@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://b0q5wk3utd6ev"]
+
+[ext_resource type="Texture2D" path="res://assets/l1_nord_active_frames/l1_nord_active_00.png" id="1_factory_texture"]
+[ext_resource type="Script" path="res://scripts/factory.gd" id="2_factory_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_factory"]
+size = Vector2(132, 92)
+
+[node name="FactoryL1Nord" type="StaticBody2D"]
+script = ExtResource("2_factory_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -36)
+scale = Vector2(0.78, 0.78)
+texture = ExtResource("1_factory_texture")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 30)
+shape = SubResource("RectangleShape2D_factory")
+
+[node name="StatusLabel" type="Label" parent="."]
+offset_left = -128.0
+offset_top = -148.0
+offset_right = 128.0
+offset_bottom = -74.0
+text = "L1 Nord"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.88, 0.96, 1, 1)
+
+[node name="InfoButton" type="Button" parent="."]
+z_index = 45
+offset_left = 88.0
+offset_top = -154.0
+offset_right = 114.0
+offset_bottom = -128.0
+focus_mode = 0
+text = "i"
+theme_override_font_sizes/font_size = 14
+
+[node name="InfoPanel" type="PanelContainer" parent="."]
+visible = false
+z_index = 44
+offset_left = 108.0
+offset_top = -198.0
+offset_right = 332.0
+offset_bottom = -62.0
+
+[node name="Margin" type="MarginContainer" parent="InfoPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 8
+
+[node name="InfoText" type="Label" parent="InfoPanel/Margin"]
+layout_mode = 2
+text = "L1 Nord"
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.88, 0.96, 1, 1)

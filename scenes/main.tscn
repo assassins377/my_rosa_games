@@ -1,0 +1,351 @@
+[gd_scene load_steps=9 format=3 uid="uid://4qv68lw4syik"]
+
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="1_player"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="2_main"]
+[ext_resource type="Script" path="res://scripts/procedural_world.gd" id="3_world"]
+[ext_resource type="Script" path="res://scripts/mobile_controls.gd" id="4_mobile_controls"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mobile_pad"]
+bg_color = Color(0.05, 0.065, 0.072, 0.58)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.26, 0.92, 1, 0.42)
+corner_radius_top_left = 86
+corner_radius_top_right = 86
+corner_radius_bottom_right = 86
+corner_radius_bottom_left = 86
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mobile_knob"]
+bg_color = Color(0.18, 0.9, 0.95, 0.82)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.94, 0.98, 1, 0.62)
+corner_radius_top_left = 31
+corner_radius_top_right = 31
+corner_radius_bottom_right = 31
+corner_radius_bottom_left = 31
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mobile_button"]
+bg_color = Color(0.08, 0.105, 0.11, 0.78)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.65, 0.28, 0.58)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 12
+content_margin_top = 8
+content_margin_right = 12
+content_margin_bottom = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mobile_button_pressed"]
+bg_color = Color(0.18, 0.22, 0.21, 0.88)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.31, 0.94, 1, 0.86)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 12
+content_margin_top = 8
+content_margin_right = 12
+content_margin_bottom = 8
+
+[node name="Main" type="Node2D"]
+script = ExtResource("2_main")
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="ProceduralWorld" type="Node2D" parent="World"]
+z_index = -20
+script = ExtResource("3_world")
+player_path = NodePath("../../Player")
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(0, -170)
+
+[node name="Buildings" type="Node2D" parent="."]
+
+[node name="Hud" type="CanvasLayer" parent="."]
+
+[node name="TopHud" type="VBoxContainer" parent="Hud"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 24.0
+offset_top = 20.0
+offset_right = -24.0
+offset_bottom = 170.0
+grow_horizontal = 2
+theme_override_constants/separation = 4
+
+[node name="Help" type="Label" parent="Hud/TopHud"]
+layout_mode = 2
+text = "Explore the planet, build a base, and connect power to L1 Nord."
+autowrap_mode = 3
+theme_override_colors/font_color = Color(0.92, 0.95, 0.9, 1)
+
+[node name="Goal" type="Label" parent="Hud/TopHud"]
+layout_mode = 2
+text = "Factories: 0"
+theme_override_colors/font_color = Color(0.92, 0.95, 0.9, 1)
+
+[node name="Health" type="Label" parent="Hud/TopHud"]
+layout_mode = 2
+text = "Empty field. Place L1 Nord."
+autowrap_mode = 3
+theme_override_colors/font_color = Color(0.92, 0.95, 0.9, 1)
+
+[node name="BuildButton" type="Button" parent="Hud/TopHud"]
+custom_minimum_size = Vector2(220, 40)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Place L1 Nord"
+
+[node name="BatteryButton" type="Button" parent="Hud/TopHud"]
+custom_minimum_size = Vector2(220, 40)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Place Battery"
+
+[node name="WireButton" type="Button" parent="Hud/TopHud"]
+custom_minimum_size = Vector2(220, 40)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Place Wire"
+
+[node name="Status" type="Label" parent="Hud"]
+anchor_left = 0.08
+anchor_top = 0.42
+anchor_right = 0.92
+anchor_bottom = 0.58
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(1, 0.94, 0.76, 1)
+
+[node name="MobileControls" type="Control" parent="Hud"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_mobile_controls")
+
+[node name="PauseButton" type="Button" parent="Hud/MobileControls"]
+custom_minimum_size = Vector2(94, 44)
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -118.0
+offset_top = 18.0
+offset_right = -24.0
+offset_bottom = 62.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_mobile_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mobile_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mobile_button_pressed")
+text = "Pause"
+
+[node name="JoystickRoot" type="Control" parent="Hud/MobileControls"]
+layout_mode = 1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = -194.0
+offset_right = 194.0
+offset_bottom = -22.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="TouchArea" type="Panel" parent="Hud/MobileControls/JoystickRoot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mobile_pad")
+
+[node name="Knob" type="Panel" parent="Hud/MobileControls/JoystickRoot/TouchArea"]
+custom_minimum_size = Vector2(62, 62)
+layout_mode = 1
+offset_left = 55.0
+offset_top = 55.0
+offset_right = 117.0
+offset_bottom = 117.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mobile_knob")
+
+[node name="ActionPanel" type="VBoxContainer" parent="Hud/MobileControls"]
+layout_mode = 1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -230.0
+offset_top = -248.0
+offset_right = -22.0
+offset_bottom = -22.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="DashButton" type="Button" parent="Hud/MobileControls/ActionPanel"]
+custom_minimum_size = Vector2(208, 58)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_mobile_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mobile_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mobile_button_pressed")
+text = "Dash"
+
+[node name="BuildRow" type="HBoxContainer" parent="Hud/MobileControls/ActionPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="FactoryButton" type="Button" parent="Hud/MobileControls/ActionPanel/BuildRow"]
+custom_minimum_size = Vector2(64, 54)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_mobile_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mobile_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mobile_button_pressed")
+text = "L1 Nord"
+
+[node name="BatteryButton" type="Button" parent="Hud/MobileControls/ActionPanel/BuildRow"]
+custom_minimum_size = Vector2(64, 54)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_mobile_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mobile_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mobile_button_pressed")
+text = "Battery"
+
+[node name="WireButton" type="Button" parent="Hud/MobileControls/ActionPanel/BuildRow"]
+custom_minimum_size = Vector2(64, 54)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_mobile_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mobile_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mobile_button_pressed")
+text = "Wire"
+
+[node name="PlaceRow" type="HBoxContainer" parent="Hud/MobileControls/ActionPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="PlaceButton" type="Button" parent="Hud/MobileControls/ActionPanel/PlaceRow"]
+custom_minimum_size = Vector2(136, 54)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_mobile_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mobile_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mobile_button_pressed")
+text = "Place"
+
+[node name="CancelButton" type="Button" parent="Hud/MobileControls/ActionPanel/PlaceRow"]
+custom_minimum_size = Vector2(64, 54)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_mobile_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mobile_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mobile_button_pressed")
+text = "X"
+
+[node name="PauseOverlay" type="Control" parent="Hud"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Shade" type="ColorRect" parent="Hud/PauseOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.55)
+
+[node name="Panel" type="PanelContainer" parent="Hud/PauseOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -180.0
+offset_right = 180.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="Hud/PauseOverlay/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 24
+
+[node name="VBox" type="VBoxContainer" parent="Hud/PauseOverlay/Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="Hud/PauseOverlay/Panel/Margin/VBox"]
+layout_mode = 2
+text = "Paused"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(0.98, 0.94, 0.88, 1)
+
+[node name="ResumeButton" type="Button" parent="Hud/PauseOverlay/Panel/Margin/VBox"]
+custom_minimum_size = Vector2(240, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Resume"
+
+[node name="RestartButton" type="Button" parent="Hud/PauseOverlay/Panel/Margin/VBox"]
+custom_minimum_size = Vector2(240, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Restart"
+
+[node name="LanguageButton" type="Button" parent="Hud/PauseOverlay/Panel/Margin/VBox"]
+custom_minimum_size = Vector2(240, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Language: English"
+
+[node name="MenuButton" type="Button" parent="Hud/PauseOverlay/Panel/Margin/VBox"]
+custom_minimum_size = Vector2(240, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Main menu"
