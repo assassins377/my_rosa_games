@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://4qv68lw4syik"]
+[gd_scene load_steps=10 format=3 uid="uid://4qv68lw4syik"]
 
 [ext_resource type="PackedScene" path="res://scenes/player.tscn" id="1_player"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="2_main"]
 [ext_resource type="Script" path="res://scripts/procedural_world.gd" id="3_world"]
 [ext_resource type="Script" path="res://scripts/mobile_controls.gd" id="4_mobile_controls"]
+[ext_resource type="Texture2D" path="res://assets/ui/battery_icon.png" id="5_battery_icon"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mobile_pad"]
 bg_color = Color(0.05, 0.065, 0.072, 0.58)
@@ -240,7 +241,9 @@ theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxFlat_mobile_button")
 theme_override_styles/hover = SubResource("StyleBoxFlat_mobile_button")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_mobile_button_pressed")
-text = "Battery"
+tooltip_text = "Battery"
+icon = ExtResource("5_battery_icon")
+expand_icon = true
 
 [node name="WireButton" type="Button" parent="Hud/MobileControls/ActionPanel/BuildRow"]
 custom_minimum_size = Vector2(64, 54)

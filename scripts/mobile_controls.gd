@@ -39,6 +39,7 @@ func _ready() -> void:
 	place_button.pressed.connect(func(): place_pressed.emit())
 	cancel_button.pressed.connect(func(): cancel_pressed.emit())
 	pause_button.pressed.connect(func(): pause_pressed.emit())
+	battery_button.text = ""
 	set_build_mode(false)
 	fit_to_screen(get_viewport_rect().size)
 	call_deferred("_reset_joystick")
@@ -124,7 +125,8 @@ func set_texts(
 ) -> void:
 	dash_button.text = dash_text
 	factory_button.text = factory_text
-	battery_button.text = battery_text
+	battery_button.text = ""
+	battery_button.tooltip_text = battery_text
 	wire_button.text = wire_text
 	place_button.text = place_text
 	cancel_button.text = cancel_text

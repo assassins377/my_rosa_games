@@ -8,10 +8,14 @@ const SETTINGS_MIN_SIZE := Vector2(300.0, 340.0)
 const STORY_MAX_SIZE := Vector2(600.0, 500.0)
 const STORY_MIN_SIZE := Vector2(300.0, 300.0)
 const SCREEN_MARGIN := 24.0
+const MENU_BACKGROUND_DIR := "res://assets/menu_backgrounds"
+const MENU_BACKGROUND_STATE_PATH := "user://menu_background.cfg"
+const MENU_BACKGROUND_EXTENSIONS := ["png", "jpg", "jpeg", "webp"]
 
 @onready var language = get_node("/root/Language")
 @onready var screen = get_node("/root/Screen")
 @onready var controls = get_node("/root/Controls")
+@onready var background_image: TextureRect = $BackgroundImage
 @onready var panel: PanelContainer = $Panel
 @onready var title_label: Label = $Panel/Margin/Scroll/VBox/Title
 @onready var subtitle_label: Label = $Panel/Margin/Scroll/VBox/Subtitle
@@ -53,6 +57,7 @@ var _rebinding_action := &""
 
 
 func _ready() -> void:
+	_apply_random_background()
 	play_button.pressed.connect(_on_play_pressed)
 	how_to_play_button.pressed.connect(_on_how_to_play_pressed)
 	story_button.pressed.connect(_on_story_pressed)
@@ -79,6 +84,86 @@ func _ready() -> void:
 	_fit_to_screen()
 	_update_text()
 	play_button.grab_focus()
+
+
+func _apply_random_background() -> void:
+	var background_paths := _menu_background_paths()
+
+	if background_paths.is_empty():
+		background_image.visible = false
+		background_image.texture = null
+		return
+
+	var selected_path := _choose_menu_background(background_paths)
+	var selected_texture := load(selected_path) as Texture2D
+
+	if selected_texture == null:
+		background_image.visible = false
+		background_image.texture = null
+		return
+
+	background_image.texture = selected_texture
+	background_image.visible = true
+	_save_last_menu_background(selected_path)
+
+
+func _menu_background_paths() -> Array[String]:
+	var paths: Array[String] = []
+	var directory := DirAccess.open(MENU_BACKGROUND_DIR)
+
+	if directory == null:
+		return paths
+
+	directory.list_dir_begin()
+	var file_name := directory.get_next()
+
+	while file_name != "":
+		if not directory.current_is_dir() and _is_menu_background_file(file_name):
+			paths.append(MENU_BACKGROUND_DIR + "/" + file_name)
+
+		file_name = directory.get_next()
+
+	directory.list_dir_end()
+	paths.sort()
+	return paths
+
+
+func _is_menu_background_file(file_name: String) -> bool:
+	return MENU_BACKGROUND_EXTENSIONS.has(file_name.get_extension().to_lower())
+
+
+func _choose_menu_background(background_paths: Array[String]) -> String:
+	if background_paths.size() <= 1:
+		return background_paths[0]
+
+	var last_background := _load_last_menu_background()
+	var candidates: Array[String] = []
+
+	for path in background_paths:
+		if path != last_background:
+			candidates.append(path)
+
+	if candidates.is_empty():
+		candidates = background_paths
+
+	var rng := RandomNumberGenerator.new()
+	rng.randomize()
+	return candidates[rng.randi_range(0, candidates.size() - 1)]
+
+
+func _load_last_menu_background() -> String:
+	var config := ConfigFile.new()
+
+	if config.load(MENU_BACKGROUND_STATE_PATH) != OK:
+		return ""
+
+	return str(config.get_value("menu", "last_background", ""))
+
+
+func _save_last_menu_background(background_path: String) -> void:
+	var config := ConfigFile.new()
+	config.set_value("menu", "last_background", background_path)
+	config.save(MENU_BACKGROUND_STATE_PATH)
 
 
 func _unhandled_input(event: InputEvent) -> void:
